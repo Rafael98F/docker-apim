@@ -30,10 +30,10 @@ services:
     command: [--ssl=0]
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-proot"]
-      interval: 30s
+      interval: 40s
       timeout: 60s
       retries: 5
-      start_period: 80s
+      start_period: 100s
   am-analytics-worker:
     image: wso2/wso2am-analytics-worker:3.1.0
     ports:
@@ -41,8 +41,8 @@ services:
       - "9444"
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9444"]
-      interval: 10s
-      start_period: 20s
+      interval: 20s
+      start_period: 40s
       retries: 5
     depends_on:
       mysql:
@@ -53,8 +53,8 @@ services:
     image: wso2/wso2is-km:5.10.0
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9443"]
-      interval: 10s
-      start_period: 100s
+      interval: 30s
+      start_period: 140s
       retries: 10
     depends_on:
       mysql:
@@ -67,8 +67,8 @@ services:
     image: wso2/wso2am:3.1.0
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9443"]
-      interval: 10s
-      start_period: 100s
+      interval: 30s
+      start_period: 140s
       retries: 10
     depends_on:
       mysql:
@@ -89,9 +89,9 @@ services:
       - "9643:9643"
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9643"]
-      interval: 10s
+      interval: 30s
       retries: 5
-      start_period: 20s
+      start_period: 70s
     depends_on:
       mysql:
         condition: service_healthy
